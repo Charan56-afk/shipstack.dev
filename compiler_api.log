@@ -1,0 +1,1986 @@
+[2026-05-30T08:15:31.596Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:15:31.599Z] System message length: 62
+[2026-05-30T08:15:31.600Z] User messages count: 1
+[2026-05-30T08:15:31.601Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a CRM with login, contacts, dashboard, role-based access, and premium plan with ...
+[2026-05-30T08:15:31.602Z] Routing to Groq...
+[2026-05-30T08:15:32.465Z] Groq response received! Status: 200. Text length: 660
+[2026-05-30T08:15:32.466Z] Groq text preview: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer relationship management system with role-based access and premium plan payments",
+  "features": ["login", "contacts", "dashboard", "role-based access", "premium plan", "payments", "analytics"],
+  "enti...
+[2026-05-30T08:15:32.467Z] Groq text end preview: ...les": ["Admin", "User"],
+  "integrations": ["payments"],
+  "assumptions": ["premium plan includes additional features or support", "analytics are viewable by admins only"],
+  "clarifications_needed": ["what specific features are included in the premium plan", "what kind of analytics are required"]
+}
+[2026-05-30T08:15:32.589Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:15:32.591Z] System message length: 62
+[2026-05-30T08:15:32.594Z] User messages count: 1
+[2026-05-30T08:15:32.635Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A custo...
+[2026-05-30T08:15:32.636Z] Routing to Groq...
+[2026-05-30T08:15:35.149Z] Groq response received! Status: 200. Text length: 4390
+[2026-05-30T08:15:35.150Z] Groq text preview: {
+  "entities": [
+    {
+      "name": "User",
+      "fields": [
+        {"name": "id", "type": "uuid", "required": true, "unique": true},
+        {"name": "username", "type": "string", "required": true, "unique": true},
+        {"name": "email", "type": "string", "required": true, "unique": true},
+ ...
+[2026-05-30T08:15:35.151Z] Groq text end preview: ...: [
+        "list",
+        "get",
+        "create",
+        "update",
+        "delete"
+      ]
+    },
+    {
+      "resource": "payments",
+      "base_path": "/api/payments",
+      "operations": [
+        "list",
+        "get",
+        "create",
+        "update",
+        "delete"
+      ]
+    }
+  ]
+}
+[2026-05-30T08:15:35.199Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:15:35.200Z] System message length: 62
+[2026-05-30T08:15:35.200Z] User messages count: 1
+[2026-05-30T08:15:35.202Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rel...
+[2026-05-30T08:15:35.203Z] Routing to Groq...
+[2026-05-30T08:15:43.819Z] Groq response received! Status: 200. Text length: 8978
+[2026-05-30T08:15:43.820Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "columns": [
+          {"name": "id", "type": "uuid", "nullable": false, "default": null, "primary_key": true, "foreign_key": null},
+          {"name": "username", "type": "varchar(255)", "nullable": false, "default":...
+[2026-05-30T08:15:43.821Z] Groq text end preview: ...      },
+      {
+        "role": "User",
+        "resource": "contacts",
+        "actions": ["read", "write"]
+      },
+      {
+        "role": "User",
+        "resource": "payments",
+        "actions": ["read"]
+      }
+    ],
+    "protected_routes": ["/dashboard", "/contacts", "/payments"]
+  }
+}
+```
+[2026-05-30T08:15:44.369Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:15:44.370Z] System message length: 62
+[2026-05-30T08:15:44.370Z] User messages count: 1
+[2026-05-30T08:15:44.371Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rel...
+[2026-05-30T08:15:44.372Z] Routing to Groq...
+[2026-05-30T08:16:09.396Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 6884, Requested 6118. Please try again in 5.01s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:16:10.435Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:16:10.436Z] System message length: 62
+[2026-05-30T08:16:10.437Z] User messages count: 1
+[2026-05-30T08:16:10.437Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rel...
+[2026-05-30T08:16:10.438Z] Routing to Groq...
+[2026-05-30T08:16:22.322Z] Groq response received! Status: 200. Text length: 7696
+[2026-05-30T08:16:22.323Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "columns": [
+          {"name": "id", "type": "uuid", "nullable": false, "default": null, "primary_key": true, "foreign_key": null},
+          {"name": "username", "type": "varchar(255)", "nullable": false, "default":...
+[2026-05-30T08:16:22.324Z] Groq text end preview: ...": [
+      {
+        "role": "Admin",
+        "resource": "users",
+        "actions": ["read", "write", "delete"]
+      },
+      {
+        "role": "User",
+        "resource": "contacts",
+        "actions": ["read", "write"]
+      }
+    ],
+    "protected_routes": ["/dashboard", "/contacts"]
+  }
+}
+```
+[2026-05-30T08:16:22.365Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:16:22.366Z] System message length: 62
+[2026-05-30T08:16:22.374Z] User messages count: 1
+[2026-05-30T08:16:22.376Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rela...
+[2026-05-30T08:16:22.377Z] Routing to Groq...
+[2026-05-30T08:16:44.142Z] Groq response received! Status: 200. Text length: 12959
+[2026-05-30T08:16:44.144Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "nullable": false,
+            "default": null,
+            "primary_key": true,
+            "foreign_key": null
+          },
+...
+[2026-05-30T08:16:44.147Z] Groq text end preview: ...    "actions": [
+          "read",
+          "write"
+        ]
+      },
+      {
+        "role": "Admin",
+        "resource": "analytics",
+        "actions": [
+          "read"
+        ]
+      }
+    ],
+    "protected_routes": [
+      "/dashboard",
+      "/contacts",
+      "/analytics"
+    ]
+  }
+}
+```
+[2026-05-30T08:17:10.621Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:17:10.622Z] System message length: 62
+[2026-05-30T08:17:10.623Z] User messages count: 1
+[2026-05-30T08:17:10.623Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a CRM with login, contacts, dashboard, role-based access, and premium plan with ...
+[2026-05-30T08:17:10.624Z] Routing to Groq...
+[2026-05-30T08:17:11.385Z] Groq response received! Status: 200. Text length: 635
+[2026-05-30T08:17:11.387Z] Groq text preview: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer relationship management system with role-based access and premium plan payments",
+  "features": ["login", "contacts", "dashboard", "role-based access", "premium plan", "payments", "analytics"],
+  "enti...
+[2026-05-30T08:17:11.389Z] Groq text end preview: ...", "Plan"],
+  "roles": ["admin", "user"],
+  "integrations": ["payments"],
+  "assumptions": ["premium plan has additional features", "analytics are only visible to admins"],
+  "clarifications_needed": ["what specific features are included in the premium plan", "what kind of analytics are required"]
+}
+[2026-05-30T08:17:11.461Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:17:11.464Z] System message length: 62
+[2026-05-30T08:17:11.465Z] User messages count: 1
+[2026-05-30T08:17:11.467Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A custo...
+[2026-05-30T08:17:11.468Z] Routing to Groq...
+[2026-05-30T08:17:13.722Z] Groq response received! Status: 200. Text length: 4047
+[2026-05-30T08:17:13.724Z] Groq text preview: {
+  "entities": [
+    {
+      "name": "User",
+      "fields": [
+        {"name": "id", "type": "uuid", "required": true, "unique": true},
+        {"name": "username", "type": "string", "required": true, "unique": true},
+        {"name": "email", "type": "string", "required": true, "unique": true},
+ ...
+[2026-05-30T08:17:13.726Z] Groq text end preview: ...ations": ["list", "get", "create", "update", "delete"]
+    },
+    {
+      "resource": "payments",
+      "base_path": "/api/payments",
+      "operations": ["list", "get", "create"]
+    },
+    {
+      "resource": "plans",
+      "base_path": "/api/plans",
+      "operations": ["list", "get"]
+    }
+  ]
+}
+[2026-05-30T08:17:13.858Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:17:13.864Z] System message length: 62
+[2026-05-30T08:17:13.868Z] User messages count: 1
+[2026-05-30T08:17:13.870Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rel...
+[2026-05-30T08:17:13.871Z] Routing to Groq...
+[2026-05-30T08:17:19.250Z] Groq response received! Status: 200. Text length: 11269
+[2026-05-30T08:17:19.252Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "columns": [
+          {"name": "id", "type": "uuid", "nullable": false, "default": null, "primary_key": true, "foreign_key": null},
+          {"name": "username", "type": "varchar(255)", "nullable": false, "default":...
+[2026-05-30T08:17:19.257Z] Groq text end preview: ...   "role": "user",
+        "resource": "payments",
+        "actions": ["read"]
+      },
+      {
+        "role": "user",
+        "resource": "plans",
+        "actions": ["read"]
+      }
+    ],
+    "protected_routes": ["/api/v1/users", "/api/v1/contacts", "/api/v1/payments", "/api/v1/plans"]
+  }
+}
+```
+[2026-05-30T08:17:19.851Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:17:19.853Z] System message length: 62
+[2026-05-30T08:17:19.863Z] User messages count: 1
+[2026-05-30T08:17:19.865Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rel...
+[2026-05-30T08:17:19.866Z] Routing to Groq...
+[2026-05-30T08:17:44.996Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 6181, Requested 6079. Please try again in 1.3s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:17:46.098Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:17:46.105Z] System message length: 62
+[2026-05-30T08:17:46.109Z] User messages count: 1
+[2026-05-30T08:17:46.111Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rel...
+[2026-05-30T08:17:46.114Z] Routing to Groq...
+[2026-05-30T08:17:54.623Z] Groq response received! Status: 200. Text length: 11248
+[2026-05-30T08:17:54.624Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "columns": [
+          {"name": "id", "type": "uuid", "nullable": false, "default": null, "primary_key": true, "foreign_key": null},
+          {"name": "username", "type": "varchar(255)", "nullable": false, "default":...
+[2026-05-30T08:17:54.625Z] Groq text end preview: ...   "role": "user",
+        "resource": "payments",
+        "actions": ["read"]
+      },
+      {
+        "role": "user",
+        "resource": "plans",
+        "actions": ["read"]
+      }
+    ],
+    "protected_routes": ["/api/v1/users", "/api/v1/contacts", "/api/v1/payments", "/api/v1/plans"]
+  }
+}
+```
+[2026-05-30T08:17:54.666Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:17:54.667Z] System message length: 62
+[2026-05-30T08:17:54.668Z] User messages count: 1
+[2026-05-30T08:17:54.669Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rela...
+[2026-05-30T08:17:54.670Z] Routing to Groq...
+[2026-05-30T08:18:20.202Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 6875, Requested 8087. Please try again in 14.809999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:18:21.319Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:18:21.326Z] System message length: 62
+[2026-05-30T08:18:21.330Z] User messages count: 1
+[2026-05-30T08:18:21.332Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rela...
+[2026-05-30T08:18:21.335Z] Routing to Groq...
+[2026-05-30T08:18:43.322Z] Groq response received! Status: 200. Text length: 17461
+[2026-05-30T08:18:43.323Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "nullable": false,
+            "default": null,
+            "primary_key": true,
+            "foreign_key": null
+          },
+...
+[2026-05-30T08:18:43.324Z] Groq text end preview: ...min",
+      "user"
+    ],
+    "rules": [
+      {
+        "role": "admin",
+        "resource": "users",
+        "actions": [
+          "read",
+          "write",
+          "delete"
+        ]
+      },
+      {
+        "role": "admin",
+        "resource": "contacts",
+        "actions": [
+          "read
+[2026-05-30T08:18:43.926Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:18:43.929Z] System message length: 62
+[2026-05-30T08:18:43.931Z] User messages count: 1
+[2026-05-30T08:18:43.933Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create an e-commerce platform with product listings, shopping cart, checkout with Stri...
+[2026-05-30T08:18:43.940Z] Routing to Groq...
+[2026-05-30T08:18:59.298Z] Groq response received! Status: 200. Text length: 643
+[2026-05-30T08:18:59.299Z] Groq text preview: {
+  "app_name": "Ecommerce Platform",
+  "app_type": "E-commerce",
+  "description": "An online platform for buying and selling products with various features",
+  "features": ["product listings", "shopping cart", "checkout", "order tracking", "vendor dashboard"],
+  "entities": ["User", "Product", "Ord...
+[2026-05-30T08:18:59.301Z] Groq text end preview: ...r", "customer"],
+  "integrations": ["Stripe"],
+  "assumptions": ["users can register and login to use the platform", "vendors can manage their products and orders"],
+  "clarifications_needed": ["how will order tracking be implemented", "what are the specific requirements for the vendor dashboard"]
+}
+[2026-05-30T08:18:59.352Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:18:59.353Z] System message length: 62
+[2026-05-30T08:18:59.354Z] User messages count: 1
+[2026-05-30T08:18:59.356Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Ecommerce Platform",
+  "app_type": "E-commerce",
+  "description": "An online p...
+[2026-05-30T08:18:59.359Z] Routing to Groq...
+[2026-05-30T08:19:04.828Z] Groq response received! Status: 200. Text length: 3967
+[2026-05-30T08:19:04.830Z] Groq text preview: {
+  "entities": [
+    {
+      "name": "User",
+      "fields": [
+        {"name": "id", "type": "uuid", "required": true, "unique": true},
+        {"name": "email", "type": "string", "required": true, "unique": true},
+        {"name": "password", "type": "string", "required": true, "unique": false},
+...
+[2026-05-30T08:19:04.832Z] Groq text end preview: ...lete"]
+    },
+    {
+      "resource": "users",
+      "base_path": "/api/users",
+      "operations": ["list", "get", "create", "update", "delete"]
+    },
+    {
+      "resource": "vendors",
+      "base_path": "/api/vendors",
+      "operations": ["list", "get", "create", "update", "delete"]
+    }
+  ]
+}
+[2026-05-30T08:19:04.915Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:19:04.917Z] System message length: 62
+[2026-05-30T08:19:04.923Z] User messages count: 1
+[2026-05-30T08:19:04.925Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Ecommerce Platform",
+  "app_type": "E-commerce",
+  "description": "An online platform...
+[2026-05-30T08:19:04.927Z] Routing to Groq...
+[2026-05-30T08:19:22.778Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:19:22.779Z] System message length: 62
+[2026-05-30T08:19:22.780Z] User messages count: 1
+[2026-05-30T08:19:22.780Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a CRM with login, contacts, dashboard, role-based access, and premium plan with ...
+[2026-05-30T08:19:22.781Z] Routing to Groq...
+[2026-05-30T08:19:23.459Z] Groq response received! Status: 200. Text length: 670
+[2026-05-30T08:19:23.460Z] Groq text preview: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer relationship management system with role-based access and premium plan payments",
+  "features": ["login", "contacts", "dashboard", "role-based access", "premium plan", "payments", "analytics"],
+  "enti...
+[2026-05-30T08:19:23.461Z] Groq text end preview: ...ser"],
+  "integrations": ["payments"],
+  "assumptions": ["premium plan has different features or limits than the free plan", "admins have full access to all features"],
+  "clarifications_needed": ["what specific analytics are required for admins", "how many roles are needed beyond admin and user"]
+}
+[2026-05-30T08:19:23.492Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:19:23.493Z] System message length: 62
+[2026-05-30T08:19:23.494Z] User messages count: 1
+[2026-05-30T08:19:23.495Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A custo...
+[2026-05-30T08:19:23.496Z] Routing to Groq...
+[2026-05-30T08:19:25.820Z] Groq response received! Status: 200. Text length: 4423
+[2026-05-30T08:19:25.825Z] Groq text preview: {
+  "entities": [
+    {
+      "name": "User",
+      "fields": [
+        {"name": "id", "type": "uuid", "required": true, "unique": true},
+        {"name": "username", "type": "string", "required": true, "unique": true},
+        {"name": "email", "type": "string", "required": true, "unique": true},
+ ...
+[2026-05-30T08:19:25.828Z] Groq text end preview: ...tions": [
+        "list",
+        "get",
+        "create",
+        "update",
+        "delete"
+      ]
+    },
+    {
+      "resource": "plans",
+      "base_path": "/api/plans",
+      "operations": [
+        "list",
+        "get",
+        "create",
+        "update",
+        "delete"
+      ]
+    }
+  ]
+}
+[2026-05-30T08:19:25.940Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:19:25.941Z] System message length: 62
+[2026-05-30T08:19:25.942Z] User messages count: 1
+[2026-05-30T08:19:25.943Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rel...
+[2026-05-30T08:19:25.944Z] Routing to Groq...
+[2026-05-30T08:19:33.671Z] Groq response received! Status: 200. Text length: 8551
+[2026-05-30T08:19:33.672Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "columns": [
+          {"name": "id", "type": "uuid", "nullable": false, "default": null, "primary_key": true, "foreign_key": null},
+          {"name": "email", "type": "varchar(255)", "nullable": false, "default": nu...
+[2026-05-30T08:19:33.674Z] Groq text end preview: ...    "resource": "products",
+        "actions": ["read", "write"]
+      },
+      {
+        "role": "customer",
+        "resource": "orders",
+        "actions": ["read", "write"]
+      }
+    ],
+    "protected_routes": ["/api/v1/users", "/api/v1/products", "/api/v1/orders", "/api/v1/vendors"]
+  }
+}
+```
+[2026-05-30T08:19:34.220Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:19:34.221Z] System message length: 62
+[2026-05-30T08:19:34.222Z] User messages count: 1
+[2026-05-30T08:19:34.223Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Ecommerce Platform",
+  "app_type": "E-commerce",
+  "description": "An online platform...
+[2026-05-30T08:19:34.224Z] Routing to Groq...
+[2026-05-30T08:19:50.756Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 6413, Requested 6112. Please try again in 2.625s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:19:51.843Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:19:51.845Z] System message length: 62
+[2026-05-30T08:19:51.850Z] User messages count: 1
+[2026-05-30T08:19:51.853Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rel...
+[2026-05-30T08:19:51.854Z] Routing to Groq...
+[2026-05-30T08:19:58.689Z] Groq response received! Status: 200. Text length: 7731
+[2026-05-30T08:19:58.694Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "columns": [
+          {"name": "id", "type": "uuid", "nullable": false, "default": null, "primary_key": true, "foreign_key": null},
+          {"name": "username", "type": "varchar(255)", "nullable": false, "default":...
+[2026-05-30T08:19:58.697Z] Groq text end preview: ...": [
+      {
+        "role": "admin",
+        "resource": "users",
+        "actions": ["read", "write", "delete"]
+      },
+      {
+        "role": "user",
+        "resource": "contacts",
+        "actions": ["read", "write"]
+      }
+    ],
+    "protected_routes": ["/dashboard", "/contacts"]
+  }
+}
+```
+[2026-05-30T08:19:59.020Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 8946, Requested 5044. Please try again in 9.95s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:19:59.248Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:19:59.249Z] System message length: 62
+[2026-05-30T08:19:59.250Z] User messages count: 1
+[2026-05-30T08:19:59.250Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rel...
+[2026-05-30T08:19:59.251Z] Routing to Groq...
+[2026-05-30T08:20:00.065Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:20:00.066Z] System message length: 62
+[2026-05-30T08:20:00.066Z] User messages count: 1
+[2026-05-30T08:20:00.067Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Ecommerce Platform",
+  "app_type": "E-commerce",
+  "description": "An online platform...
+[2026-05-30T08:20:00.068Z] Routing to Groq...
+[2026-05-30T08:20:20.595Z] Groq response received! Status: 200. Text length: 14015
+[2026-05-30T08:20:20.598Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "columns": [
+          {"name": "id", "type": "uuid", "nullable": false, "default": null, "primary_key": true, "foreign_key": null},
+          {"name": "username", "type": "varchar(255)", "nullable": false, "default":...
+[2026-05-30T08:20:20.600Z] Groq text end preview: ...   "role": "user",
+        "resource": "payments",
+        "actions": ["read"]
+      },
+      {
+        "role": "user",
+        "resource": "plans",
+        "actions": ["read"]
+      }
+    ],
+    "protected_routes": ["/api/v1/users", "/api/v1/contacts", "/api/v1/payments", "/api/v1/plans"]
+  }
+}
+```
+[2026-05-30T08:20:20.717Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:20:20.718Z] System message length: 62
+[2026-05-30T08:20:20.720Z] User messages count: 1
+[2026-05-30T08:20:20.721Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rela...
+[2026-05-30T08:20:20.725Z] Routing to Groq...
+[2026-05-30T08:20:24.859Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 9579, Requested 5048. Please try again in 13.135s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:20:25.452Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:20:25.460Z] System message length: 62
+[2026-05-30T08:20:25.463Z] User messages count: 1
+[2026-05-30T08:20:25.466Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a project management tool like Jira with tickets, sprints, kanban board, team me...
+[2026-05-30T08:20:25.472Z] Routing to Groq...
+[2026-05-30T08:20:34.027Z] Groq response received! Status: 200. Text length: 648
+[2026-05-30T08:20:34.033Z] Groq text preview: {
+  "app_name": "ProjectMaster",
+  "app_type": "Project Management Tool",
+  "description": "A project management tool for teams to track and manage tasks and projects",
+  "features": ["tickets", "sprints", "kanban board", "team members", "time tracking"],
+  "entities": ["Project", "Ticket", "Sprint"...
+[2026-05-30T08:20:34.037Z] Groq text end preview: ...team lead", "team member"],
+  "integrations": ["calendar", "email", "authentication"],
+  "assumptions": ["users will have basic project management knowledge", "teams will have a clear hierarchy"],
+  "clarifications_needed": ["specific reporting requirements", "customization options for workflows"]
+}
+[2026-05-30T08:20:34.182Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:20:34.184Z] System message length: 62
+[2026-05-30T08:20:34.185Z] User messages count: 1
+[2026-05-30T08:20:34.186Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "ProjectMaster",
+  "app_type": "Project Management Tool",
+  "description": "A p...
+[2026-05-30T08:20:34.187Z] Routing to Groq...
+[2026-05-30T08:20:39.971Z] Groq response received! Status: 200. Text length: 5206
+[2026-05-30T08:20:39.977Z] Groq text preview: {
+  "entities": [
+    {
+      "name": "Project",
+      "fields": [
+        {"name": "id", "type": "uuid", "required": true, "unique": true},
+        {"name": "name", "type": "string", "required": true, "unique": false},
+        {"name": "description", "type": "text", "required": false, "unique": fal...
+[2026-05-30T08:20:39.981Z] Groq text end preview: ..."]
+    },
+    {
+      "resource": "sprints",
+      "base_path": "/sprints",
+      "operations": ["list", "get", "create", "update", "delete"]
+    },
+    {
+      "resource": "teamMembers",
+      "base_path": "/teamMembers",
+      "operations": ["list", "get", "create", "update", "delete"]
+    }
+  ]
+}
+[2026-05-30T08:20:40.106Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:20:40.110Z] System message length: 62
+[2026-05-30T08:20:40.112Z] User messages count: 1
+[2026-05-30T08:20:40.114Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "ProjectMaster",
+  "app_type": "Project Management Tool",
+  "description": "A project ...
+[2026-05-30T08:20:40.115Z] Routing to Groq...
+[2026-05-30T08:20:45.444Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 7854, Requested 9759. Please try again in 28.065s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:20:46.530Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:20:46.531Z] System message length: 62
+[2026-05-30T08:20:46.533Z] User messages count: 1
+[2026-05-30T08:20:46.537Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Customer Relationship Manager",
+  "app_type": "CRM",
+  "description": "A customer rela...
+[2026-05-30T08:20:46.540Z] Routing to Groq...
+[2026-05-30T08:21:01.525Z] Groq response received! Status: 200. Text length: 15331
+[2026-05-30T08:21:01.528Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "projects",
+        "columns": [
+          {"name": "id", "type": "uuid", "nullable": false, "default": null, "primary_key": true, "foreign_key": null},
+          {"name": "name", "type": "varchar(255)", "nullable": false, "default": ...
+[2026-05-30T08:21:01.530Z] Groq text end preview: ...inding": "/projects/:id"
+          },
+          {
+            "type": "DataTable",
+            "name": "TicketList",
+            "props": {},
+            "api_binding": "/tickets?project_id=:id"
+          },
+          {
+            "type": "DataTable",
+            "name": "SprintList",
+            "
+[2026-05-30T08:21:02.592Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:21:02.593Z] System message length: 62
+[2026-05-30T08:21:02.595Z] User messages count: 1
+[2026-05-30T08:21:02.596Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "ProjectMaster",
+  "app_type": "Project Management Tool",
+  "description": "A project ...
+[2026-05-30T08:21:02.597Z] Routing to Groq...
+[2026-05-30T08:21:11.990Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 91387, Requested 9759. Please try again in 16m30.144s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:21:12.591Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:21:12.594Z] System message length: 62
+[2026-05-30T08:21:12.596Z] User messages count: 1
+[2026-05-30T08:21:12.602Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create an e-commerce platform with product listings, shopping cart, checkout with Stri...
+[2026-05-30T08:21:12.604Z] Routing to Groq...
+[2026-05-30T08:21:20.852Z] Groq response received! Status: 200. Text length: 582
+[2026-05-30T08:21:20.854Z] Groq text preview: {
+  "app_name": "EcomPlus",
+  "app_type": "E-commerce",
+  "description": "An e-commerce platform for managing products, orders, and vendors",
+  "features": ["product listings", "shopping cart", "checkout", "order tracking", "vendor dashboard"],
+  "entities": ["Product", "Order", "Vendor", "Customer"...
+[2026-05-30T08:21:20.856Z] Groq text end preview: ...endor", "Customer"],
+  "roles": ["admin", "vendor", "customer"],
+  "integrations": ["Stripe"],
+  "assumptions": ["vendors will manage their own products", "customers can track their orders"],
+  "clarifications_needed": ["how will vendor commissions be handled", "what is the expected order volume"]
+}
+[2026-05-30T08:21:20.989Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:21:20.994Z] System message length: 62
+[2026-05-30T08:21:20.996Z] User messages count: 1
+[2026-05-30T08:21:20.999Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "EcomPlus",
+  "app_type": "E-commerce",
+  "description": "An e-commerce platfor...
+[2026-05-30T08:21:21.000Z] Routing to Groq...
+[2026-05-30T08:21:26.167Z] Groq response received! Status: 200. Text length: 3836
+[2026-05-30T08:21:26.169Z] Groq text preview: {
+  "entities": [
+    {
+      "name": "Product",
+      "fields": [
+        {"name": "id", "type": "uuid", "required": true, "unique": true},
+        {"name": "name", "type": "string", "required": true, "unique": false},
+        {"name": "description", "type": "text", "required": false, "unique": fal...
+[2026-05-30T08:21:26.177Z] Groq text end preview: ..., "create", "update", "delete"]
+    },
+    {
+      "resource": "customers",
+      "base_path": "/api/customers",
+      "operations": ["list", "get", "create", "update", "delete"]
+    },
+    {
+      "resource": "payments",
+      "base_path": "/api/payments",
+      "operations": ["create"]
+    }
+  ]
+}
+[2026-05-30T08:21:26.297Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:21:26.299Z] System message length: 62
+[2026-05-30T08:21:26.300Z] User messages count: 1
+[2026-05-30T08:21:26.301Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "EcomPlus",
+  "app_type": "E-commerce",
+  "description": "An e-commerce platform for m...
+[2026-05-30T08:21:26.301Z] Routing to Groq...
+[2026-05-30T08:21:27.374Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 8002, Requested 6564. Please try again in 12.829999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:21:28.408Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:21:28.409Z] System message length: 62
+[2026-05-30T08:21:28.410Z] User messages count: 1
+[2026-05-30T08:21:28.410Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "ProjectMaster",
+  "app_type": "Project Management Tool",
+  "description": "A project ...
+[2026-05-30T08:21:28.411Z] Routing to Groq...
+[2026-05-30T08:21:46.209Z] Groq response received! Status: 200. Text length: 10191
+[2026-05-30T08:21:46.210Z] Groq text preview: ```json
+{
+  "database": {
+    "tables": [
+      {
+        "name": "products",
+        "columns": [
+          {"name": "id", "type": "uuid", "nullable": false, "default": null, "primary_key": true, "foreign_key": null},
+          {"name": "name", "type": "varchar(255)", "nullable": false, "default": ...
+[2026-05-30T08:21:46.212Z] Groq text end preview: ...vendor",
+        "resource": "products",
+        "actions": ["read", "write"]
+      },
+      {
+        "role": "customer",
+        "resource": "orders",
+        "actions": ["read", "write"]
+      }
+    ],
+    "protected_routes": ["/api/v1/orders", "/api/v1/order-items", "/api/v1/products"]
+  }
+}
+```
+[2026-05-30T08:21:46.750Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:21:46.751Z] System message length: 62
+[2026-05-30T08:21:46.752Z] User messages count: 1
+[2026-05-30T08:21:46.755Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "EcomPlus",
+  "app_type": "E-commerce",
+  "description": "An e-commerce platform for m...
+[2026-05-30T08:21:46.755Z] Routing to Groq...
+[2026-05-30T08:21:53.177Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 98055, Requested 6251. Please try again in 1h2m0.384s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:21:53.895Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:21:53.918Z] System message length: 62
+[2026-05-30T08:21:53.921Z] User messages count: 1
+[2026-05-30T08:21:53.925Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create a learning management system with courses, lessons, quizzes, student progress t...
+[2026-05-30T08:21:53.991Z] Routing to Groq...
+[2026-05-30T08:22:11.634Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 98034, Requested 6053. Please try again in 58m51.167999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:22:17.073Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:22:17.074Z] System message length: 62
+[2026-05-30T08:22:17.075Z] User messages count: 1
+[2026-05-30T08:22:17.076Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "EcomPlus",
+  "app_type": "E-commerce",
+  "description": "An e-commerce platform for m...
+[2026-05-30T08:22:17.076Z] Routing to Groq...
+[2026-05-30T08:22:19.164Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 98026, Requested 4255. Please try again in 32m50.784s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:22:21.007Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:22:21.008Z] System message length: 62
+[2026-05-30T08:22:21.009Z] User messages count: 1
+[2026-05-30T08:22:21.009Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create a learning management system with courses, lessons, quizzes, student progress t...
+[2026-05-30T08:22:21.010Z] Routing to Groq...
+[2026-05-30T08:22:43.315Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 97997, Requested 6053. Please try again in 58m19.2s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:22:44.009Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:22:44.010Z] System message length: 62
+[2026-05-30T08:22:44.011Z] User messages count: 1
+[2026-05-30T08:22:44.012Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a project management tool like Jira with tickets, sprints, kanban board, team me...
+[2026-05-30T08:22:44.013Z] Routing to Groq...
+[2026-05-30T08:22:44.340Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:22:44.973Z] Groq response received! Status: 200. Text length: 598
+[2026-05-30T08:22:45.009Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:22:45.010Z] System message length: 62
+[2026-05-30T08:22:45.011Z] User messages count: 1
+[2026-05-30T08:22:45.012Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Project Manager",
+  "app_type": "Project Management Tool",
+  "description": "A...
+[2026-05-30T08:22:45.013Z] Routing to Groq...
+[2026-05-30T08:22:45.149Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:22:45.362Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:22:45.978Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 97994, Requested 3942. Please try again in 27m52.704s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:22:48.020Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:22:48.022Z] System message length: 62
+[2026-05-30T08:22:48.024Z] User messages count: 1
+[2026-05-30T08:22:48.026Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create a learning management system with courses, lessons, quizzes, student progress t...
+[2026-05-30T08:22:48.028Z] Routing to Groq...
+[2026-05-30T08:22:48.078Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:22:48.123Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:22:49.635Z] Groq response received! Status: 200. Text length: 3488
+[2026-05-30T08:22:49.709Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:22:49.712Z] System message length: 62
+[2026-05-30T08:22:49.714Z] User messages count: 1
+[2026-05-30T08:22:49.718Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Project Manager",
+  "app_type": "Project Management Tool",
+  "description": "A tool f...
+[2026-05-30T08:22:49.720Z] Routing to Groq...
+[2026-05-30T08:22:49.783Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:22:49.833Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:22:51.182Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:22:52.884Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:22:57.433Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4611, Requested 4255. Please try again in 28.66s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:22:58.013Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:22:58.014Z] System message length: 62
+[2026-05-30T08:22:58.016Z] User messages count: 1
+[2026-05-30T08:22:58.017Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a healthcare appointment booking system with doctors, patients, scheduling, remi...
+[2026-05-30T08:22:58.019Z] Routing to Groq...
+[2026-05-30T08:22:58.066Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:22:58.202Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:22:58.943Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4460, Requested 5938. Please try again in 43.98s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:23:00.025Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:23:00.027Z] System message length: 62
+[2026-05-30T08:23:00.029Z] User messages count: 1
+[2026-05-30T08:23:00.034Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Project Manager",
+  "app_type": "Project Management Tool",
+  "description": "A tool f...
+[2026-05-30T08:23:00.036Z] Routing to Groq...
+[2026-05-30T08:23:00.082Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:23:00.137Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:23:01.631Z] Groq response received! Status: 200. Text length: 741
+[2026-05-30T08:23:01.742Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:23:01.744Z] System message length: 62
+[2026-05-30T08:23:01.746Z] User messages count: 1
+[2026-05-30T08:23:01.747Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Healthcare Appointment Booking System",
+  "app_type": "SaaS",
+  "description":...
+[2026-05-30T08:23:01.749Z] Routing to Groq...
+[2026-05-30T08:23:01.795Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:23:01.844Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:23:03.195Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:23:06.389Z] Groq response received! Status: 200. Text length: 2934
+[2026-05-30T08:23:06.466Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:23:06.468Z] System message length: 62
+[2026-05-30T08:23:06.472Z] User messages count: 1
+[2026-05-30T08:23:06.473Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Healthcare Appointment Booking System",
+  "app_type": "SaaS",
+  "description": "A sys...
+[2026-05-30T08:23:06.475Z] Routing to Groq...
+[2026-05-30T08:23:06.524Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:23:06.653Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:23:09.248Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5168, Requested 2911. Please try again in 20.79s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:23:09.705Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:23:11.018Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:23:11.021Z] System message length: 62
+[2026-05-30T08:23:11.024Z] User messages count: 1
+[2026-05-30T08:23:11.026Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Project Manager",
+  "app_type": "Project Management Tool",
+  "description": "A tool f...
+[2026-05-30T08:23:11.028Z] Routing to Groq...
+[2026-05-30T08:23:11.077Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:23:11.262Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:23:14.350Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:23:15.903Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4503, Requested 5726. Please try again in 42.29s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:23:20.514Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4042, Requested 5938. Please try again in 39.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:23:52.295Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:23:52.296Z] System message length: 62
+[2026-05-30T08:23:52.297Z] User messages count: 1
+[2026-05-30T08:23:52.298Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create an e-commerce platform with product listings, shopping cart, checkout with Stri...
+[2026-05-30T08:23:52.304Z] Routing to Groq...
+[2026-05-30T08:23:52.474Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:23:53.191Z] Groq response received! Status: 200. Text length: 665
+[2026-05-30T08:23:53.325Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:23:53.327Z] System message length: 62
+[2026-05-30T08:23:53.339Z] User messages count: 1
+[2026-05-30T08:23:53.342Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-comme...
+[2026-05-30T08:23:53.344Z] Routing to Groq...
+[2026-05-30T08:23:53.397Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:23:53.451Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:23:56.516Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:24:04.145Z] Groq response received! Status: 200. Text length: 3079
+[2026-05-30T08:24:04.188Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:24:04.192Z] System message length: 62
+[2026-05-30T08:24:04.193Z] User messages count: 1
+[2026-05-30T08:24:04.196Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-commerce pla...
+[2026-05-30T08:24:04.197Z] Routing to Groq...
+[2026-05-30T08:24:04.247Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:24:04.394Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:24:07.461Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:24:13.668Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4474, Requested 2723. Please try again in 11.97s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:24:14.776Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:24:14.777Z] System message length: 62
+[2026-05-30T08:24:14.778Z] User messages count: 1
+[2026-05-30T08:24:14.779Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-commerce pla...
+[2026-05-30T08:24:14.780Z] Routing to Groq...
+[2026-05-30T08:24:14.834Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:24:14.979Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:24:18.071Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:24:24.212Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3419, Requested 2723. Please try again in 1.42s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:24:25.314Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:24:25.317Z] System message length: 62
+[2026-05-30T08:24:25.320Z] User messages count: 1
+[2026-05-30T08:24:25.329Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-commerce pla...
+[2026-05-30T08:24:25.332Z] Routing to Groq...
+[2026-05-30T08:24:25.395Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:24:28.211Z] Groq response received! Status: 200. Text length: 5772
+[2026-05-30T08:24:28.325Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:24:28.330Z] System message length: 62
+[2026-05-30T08:24:28.333Z] User messages count: 1
+[2026-05-30T08:24:28.336Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-commerce plat...
+[2026-05-30T08:24:28.360Z] Routing to Groq...
+[2026-05-30T08:24:28.410Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:24:28.668Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:24:31.721Z] Groq API error! Status: 413. Error body: {"error":{"message":"Request too large for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Requested 7117, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:24:32.759Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:24:32.760Z] System message length: 62
+[2026-05-30T08:24:32.761Z] User messages count: 1
+[2026-05-30T08:24:32.762Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-commerce plat...
+[2026-05-30T08:24:32.763Z] Routing to Groq...
+[2026-05-30T08:24:32.808Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:24:32.968Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:24:36.028Z] Groq API error! Status: 413. Error body: {"error":{"message":"Request too large for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Requested 7117, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:26:31.266Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:26:31.267Z] System message length: 62
+[2026-05-30T08:26:31.270Z] User messages count: 1
+[2026-05-30T08:26:31.271Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create an e-commerce platform with product listings, shopping cart, checkout with Stri...
+[2026-05-30T08:26:31.273Z] Routing to Groq...
+[2026-05-30T08:26:31.504Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:26:32.007Z] Groq response received! Status: 200. Text length: 665
+[2026-05-30T08:26:32.063Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:26:32.063Z] System message length: 62
+[2026-05-30T08:26:32.064Z] User messages count: 1
+[2026-05-30T08:26:32.065Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-comme...
+[2026-05-30T08:26:32.066Z] Routing to Groq...
+[2026-05-30T08:26:32.112Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:26:33.492Z] Groq response received! Status: 200. Text length: 2786
+[2026-05-30T08:26:33.656Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:26:33.658Z] System message length: 62
+[2026-05-30T08:26:33.659Z] User messages count: 1
+[2026-05-30T08:26:33.660Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-commerce pla...
+[2026-05-30T08:26:33.661Z] Routing to Groq...
+[2026-05-30T08:26:33.708Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:26:36.129Z] Groq response received! Status: 200. Text length: 5217
+[2026-05-30T08:27:03.136Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:27:03.137Z] System message length: 62
+[2026-05-30T08:27:03.138Z] User messages count: 1
+[2026-05-30T08:27:03.139Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a CRM with login, contacts, dashboard, role-based access, and premium plan with ...
+[2026-05-30T08:27:03.140Z] Routing to Groq...
+[2026-05-30T08:27:03.331Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:27:03.721Z] Groq response received! Status: 200. Text length: 535
+[2026-05-30T08:27:03.769Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:27:03.770Z] System message length: 62
+[2026-05-30T08:27:03.771Z] User messages count: 1
+[2026-05-30T08:27:03.772Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "CRM",
+  "app_type": "CRM",
+  "description": "A customer relationship managemen...
+[2026-05-30T08:27:03.772Z] Routing to Groq...
+[2026-05-30T08:27:03.823Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:27:03.872Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:27:06.990Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:27:14.195Z] Groq response received! Status: 200. Text length: 2559
+[2026-05-30T08:27:14.227Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:27:14.228Z] System message length: 62
+[2026-05-30T08:27:14.229Z] User messages count: 1
+[2026-05-30T08:27:14.230Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "CRM",
+  "app_type": "CRM",
+  "description": "A customer relationship management syste...
+[2026-05-30T08:27:14.231Z] Routing to Groq...
+[2026-05-30T08:27:14.287Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:27:14.407Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:27:17.475Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:27:23.668Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5052, Requested 2275. Please try again in 13.27s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:27:24.785Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:27:24.789Z] System message length: 62
+[2026-05-30T08:27:24.795Z] User messages count: 1
+[2026-05-30T08:27:24.799Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "CRM",
+  "app_type": "CRM",
+  "description": "A customer relationship management syste...
+[2026-05-30T08:27:24.801Z] Routing to Groq...
+[2026-05-30T08:27:24.867Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:27:25.011Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:27:28.080Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:27:34.290Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3989, Requested 2275. Please try again in 2.639999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:27:35.353Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:27:35.355Z] System message length: 62
+[2026-05-30T08:27:35.357Z] User messages count: 1
+[2026-05-30T08:27:35.359Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "CRM",
+  "app_type": "CRM",
+  "description": "A customer relationship management syste...
+[2026-05-30T08:27:35.361Z] Routing to Groq...
+[2026-05-30T08:27:35.414Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:27:35.570Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:27:40.669Z] Groq response received! Status: 200. Text length: 4317
+[2026-05-30T08:27:41.274Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:27:41.277Z] System message length: 62
+[2026-05-30T08:27:41.284Z] User messages count: 1
+[2026-05-30T08:27:41.287Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create an e-commerce platform with product listings, shopping cart, checkout with Stri...
+[2026-05-30T08:27:41.289Z] Routing to Groq...
+[2026-05-30T08:27:41.343Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:27:41.488Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:27:44.548Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:27:50.781Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4989, Requested 1756. Please try again in 7.449999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:27:51.897Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:27:51.901Z] System message length: 62
+[2026-05-30T08:27:51.908Z] User messages count: 1
+[2026-05-30T08:27:51.911Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create an e-commerce platform with product listings, shopping cart, checkout with Stri...
+[2026-05-30T08:27:51.914Z] Routing to Groq...
+[2026-05-30T08:27:51.977Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:27:52.110Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:27:55.170Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:28:01.700Z] Groq response received! Status: 200. Text length: 555
+[2026-05-30T08:28:01.836Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:28:01.840Z] System message length: 62
+[2026-05-30T08:28:01.850Z] User messages count: 1
+[2026-05-30T08:28:01.852Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-comme...
+[2026-05-30T08:28:01.854Z] Routing to Groq...
+[2026-05-30T08:28:01.912Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:28:02.047Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:28:06.819Z] Groq response received! Status: 200. Text length: 3083
+[2026-05-30T08:28:06.963Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:28:06.965Z] System message length: 62
+[2026-05-30T08:28:06.967Z] User messages count: 1
+[2026-05-30T08:28:06.968Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-commerce pla...
+[2026-05-30T08:28:06.970Z] Routing to Groq...
+[2026-05-30T08:28:07.025Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:28:07.204Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:28:10.265Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:28:16.455Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4132, Requested 2869. Please try again in 10.01s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:28:17.595Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:28:17.602Z] System message length: 62
+[2026-05-30T08:28:17.606Z] User messages count: 1
+[2026-05-30T08:28:17.608Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-commerce pla...
+[2026-05-30T08:28:17.609Z] Routing to Groq...
+[2026-05-30T08:28:17.658Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:28:17.844Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:28:20.902Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:28:27.079Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3069, Requested 3099. Please try again in 1.68s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:28:28.188Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:28:28.195Z] System message length: 62
+[2026-05-30T08:28:28.198Z] User messages count: 1
+[2026-05-30T08:28:28.201Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "E-commerce Platform",
+  "app_type": "E-commerce",
+  "description": "An e-commerce pla...
+[2026-05-30T08:28:28.205Z] Routing to Groq...
+[2026-05-30T08:28:28.268Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:28:28.432Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:28:36.220Z] Groq response received! Status: 200. Text length: 7968
+[2026-05-30T08:28:36.757Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:28:36.758Z] System message length: 62
+[2026-05-30T08:28:36.759Z] User messages count: 1
+[2026-05-30T08:28:36.760Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a project management tool like Jira with tickets, sprints, kanban board, team me...
+[2026-05-30T08:28:36.761Z] Routing to Groq...
+[2026-05-30T08:28:36.800Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:28:36.962Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:28:40.027Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:28:46.161Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4933, Requested 1629. Please try again in 5.62s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:28:47.207Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:28:47.209Z] System message length: 62
+[2026-05-30T08:28:47.211Z] User messages count: 1
+[2026-05-30T08:28:47.213Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a project management tool like Jira with tickets, sprints, kanban board, team me...
+[2026-05-30T08:28:47.214Z] Routing to Groq...
+[2026-05-30T08:28:47.260Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:28:47.388Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:28:50.452Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:28:57.035Z] Groq response received! Status: 200. Text length: 681
+[2026-05-30T08:28:57.109Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:28:57.111Z] System message length: 62
+[2026-05-30T08:28:57.113Z] User messages count: 1
+[2026-05-30T08:28:57.114Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Project Manager",
+  "app_type": "Project Management Tool",
+  "description": "A...
+[2026-05-30T08:28:57.117Z] Routing to Groq...
+[2026-05-30T08:28:57.166Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:28:57.298Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:29:02.333Z] Groq response received! Status: 200. Text length: 3528
+[2026-05-30T08:29:02.391Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:29:02.393Z] System message length: 62
+[2026-05-30T08:29:02.394Z] User messages count: 1
+[2026-05-30T08:29:02.396Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Project Manager",
+  "app_type": "Project Management Tool",
+  "description": "A tool t...
+[2026-05-30T08:29:02.397Z] Routing to Groq...
+[2026-05-30T08:29:02.449Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:29:02.584Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:29:05.633Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:29:11.821Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4305, Requested 3454. Please try again in 17.59s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:29:13.034Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:29:13.036Z] System message length: 62
+[2026-05-30T08:29:13.037Z] User messages count: 1
+[2026-05-30T08:29:13.039Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Project Manager",
+  "app_type": "Project Management Tool",
+  "description": "A tool t...
+[2026-05-30T08:29:13.041Z] Routing to Groq...
+[2026-05-30T08:29:13.090Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:29:13.226Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:29:16.284Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:29:22.458Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3241, Requested 3454. Please try again in 6.95s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:29:24.018Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:29:24.020Z] System message length: 62
+[2026-05-30T08:29:24.021Z] User messages count: 1
+[2026-05-30T08:29:24.022Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Project Manager",
+  "app_type": "Project Management Tool",
+  "description": "A tool t...
+[2026-05-30T08:29:24.024Z] Routing to Groq...
+[2026-05-30T08:29:24.074Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:29:24.200Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:29:27.262Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:29:33.424Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 2145, Requested 3997. Please try again in 1.42s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:29:35.019Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:29:35.021Z] System message length: 62
+[2026-05-30T08:29:35.022Z] User messages count: 1
+[2026-05-30T08:29:35.024Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create a learning management system with courses, lessons, quizzes, student progress t...
+[2026-05-30T08:29:35.025Z] Routing to Groq...
+[2026-05-30T08:29:35.075Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:29:35.614Z] Groq response received! Status: 200. Text length: 687
+[2026-05-30T08:29:35.704Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:29:35.705Z] System message length: 62
+[2026-05-30T08:29:35.707Z] User messages count: 1
+[2026-05-30T08:29:35.708Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Learning Management System",
+  "app_type": "SaaS",
+  "description": "A platfor...
+[2026-05-30T08:29:35.710Z] Routing to Groq...
+[2026-05-30T08:29:35.757Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:29:38.254Z] Groq response received! Status: 200. Text length: 5123
+[2026-05-30T08:29:38.312Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:29:38.313Z] System message length: 62
+[2026-05-30T08:29:38.316Z] User messages count: 1
+[2026-05-30T08:29:38.318Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Learning Management System",
+  "app_type": "SaaS",
+  "description": "A platform for c...
+[2026-05-30T08:29:38.319Z] Routing to Groq...
+[2026-05-30T08:29:38.369Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:29:38.415Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:29:41.471Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:29:47.633Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3063, Requested 3971. Please try again in 10.34s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:29:49.023Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:29:49.025Z] System message length: 62
+[2026-05-30T08:29:49.027Z] User messages count: 1
+[2026-05-30T08:29:49.029Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Learning Management System",
+  "app_type": "SaaS",
+  "description": "A platform for c...
+[2026-05-30T08:29:49.030Z] Routing to Groq...
+[2026-05-30T08:29:49.079Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:29:49.206Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:29:52.256Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:29:58.486Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 1978, Requested 4514. Please try again in 4.92s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:30:00.024Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:30:00.026Z] System message length: 62
+[2026-05-30T08:30:00.029Z] User messages count: 1
+[2026-05-30T08:30:00.033Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Learning Management System",
+  "app_type": "SaaS",
+  "description": "A platform for c...
+[2026-05-30T08:30:00.035Z] Routing to Groq...
+[2026-05-30T08:30:00.087Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:30:04.185Z] Groq response received! Status: 200. Text length: 12271
+[2026-05-30T08:30:05.020Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:30:05.022Z] System message length: 62
+[2026-05-30T08:30:05.023Z] User messages count: 1
+[2026-05-30T08:30:05.024Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a healthcare appointment booking system with doctors, patients, scheduling, remi...
+[2026-05-30T08:30:05.026Z] Routing to Groq...
+[2026-05-30T08:30:05.193Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:30:05.239Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:30:08.293Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:30:14.453Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4973, Requested 1752. Please try again in 7.25s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:30:16.006Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:30:16.008Z] System message length: 62
+[2026-05-30T08:30:16.009Z] User messages count: 1
+[2026-05-30T08:30:16.010Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build a healthcare appointment booking system with doctors, patients, scheduling, remi...
+[2026-05-30T08:30:16.012Z] Routing to Groq...
+[2026-05-30T08:30:16.061Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:30:16.191Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:30:19.244Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:30:25.845Z] Groq response received! Status: 200. Text length: 728
+[2026-05-30T08:30:25.901Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:30:25.902Z] System message length: 62
+[2026-05-30T08:30:25.904Z] User messages count: 1
+[2026-05-30T08:30:25.906Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Healthcare Appointment Booking System",
+  "app_type": "SaaS",
+  "description":...
+[2026-05-30T08:30:25.907Z] Routing to Groq...
+[2026-05-30T08:30:25.957Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:30:26.078Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:30:29.141Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:30:36.650Z] Groq response received! Status: 200. Text length: 3534
+[2026-05-30T08:30:36.707Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:30:36.709Z] System message length: 62
+[2026-05-30T08:30:36.711Z] User messages count: 1
+[2026-05-30T08:30:36.712Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Healthcare Appointment Booking System",
+  "app_type": "SaaS",
+  "description": "A sys...
+[2026-05-30T08:30:36.714Z] Routing to Groq...
+[2026-05-30T08:30:36.763Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:30:36.895Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:30:39.944Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:30:46.124Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3706, Requested 3416. Please try again in 11.22s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:30:48.023Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:30:48.025Z] System message length: 62
+[2026-05-30T08:30:48.026Z] User messages count: 1
+[2026-05-30T08:30:48.028Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Healthcare Appointment Booking System",
+  "app_type": "SaaS",
+  "description": "A sys...
+[2026-05-30T08:30:48.030Z] Routing to Groq...
+[2026-05-30T08:30:48.083Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:30:48.222Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:30:51.288Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:30:57.471Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 2571, Requested 3959. Please try again in 5.3s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:30:58.530Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:30:58.531Z] System message length: 62
+[2026-05-30T08:30:58.534Z] User messages count: 1
+[2026-05-30T08:30:58.536Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Healthcare Appointment Booking System",
+  "app_type": "SaaS",
+  "description": "A sys...
+[2026-05-30T08:30:58.537Z] Routing to Groq...
+[2026-05-30T08:30:58.586Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:31:03.303Z] Groq response received! Status: 200. Text length: 8123
+[2026-05-30T08:31:03.363Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:31:03.364Z] System message length: 62
+[2026-05-30T08:31:03.366Z] User messages count: 1
+[2026-05-30T08:31:03.368Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Healthcare Appointment Booking System",
+  "features": [
+    "Doctors",
+    "Patients",...
+[2026-05-30T08:31:03.369Z] Routing to Groq...
+[2026-05-30T08:31:03.522Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:31:03.575Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:31:06.627Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:31:12.790Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5000, Requested 4714. Please try again in 37.14s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:31:13.879Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:31:13.880Z] System message length: 62
+[2026-05-30T08:31:13.881Z] User messages count: 1
+[2026-05-30T08:31:13.882Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Healthcare Appointment Booking System",
+  "features": [
+    "Doctors",
+    "Patients",...
+[2026-05-30T08:31:13.883Z] Routing to Groq...
+[2026-05-30T08:31:13.931Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:31:14.057Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:31:17.116Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:31:23.275Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3952, Requested 4714. Please try again in 26.66s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:31:23.871Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:31:23.874Z] System message length: 62
+[2026-05-30T08:31:23.879Z] User messages count: 1
+[2026-05-30T08:31:23.881Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "build app"
+
+Return ONLY valid JSON with this exact structure (no markdown, no explanat...
+[2026-05-30T08:31:23.882Z] Routing to Groq...
+[2026-05-30T08:31:23.937Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:31:24.064Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:31:27.345Z] Groq response received! Status: 200. Text length: 193
+[2026-05-30T08:31:27.376Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:31:27.377Z] System message length: 62
+[2026-05-30T08:31:27.378Z] User messages count: 1
+[2026-05-30T08:31:27.379Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "build app",
+  "app_type": "",
+  "description": "",
+  "features": [],
+  "entiti...
+[2026-05-30T08:31:27.380Z] Routing to Groq...
+[2026-05-30T08:31:27.433Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:31:27.490Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:31:31.545Z] Groq response received! Status: 200. Text length: 1581
+[2026-05-30T08:31:31.608Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:31:31.609Z] System message length: 62
+[2026-05-30T08:31:31.609Z] User messages count: 1
+[2026-05-30T08:31:31.610Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "build app",
+  "app_type": "",
+  "description": "",
+  "features": [],
+  "entities": []...
+[2026-05-30T08:31:31.611Z] Routing to Groq...
+[2026-05-30T08:31:31.668Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:31:31.806Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:31:34.856Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:31:41.170Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3288, Requested 3203. Please try again in 4.909999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:31:42.997Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:31:42.998Z] System message length: 62
+[2026-05-30T08:31:42.998Z] User messages count: 1
+[2026-05-30T08:31:42.999Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "build app",
+  "app_type": "",
+  "description": "",
+  "features": [],
+  "entities": []...
+[2026-05-30T08:31:43.000Z] Routing to Groq...
+[2026-05-30T08:31:43.046Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:31:43.158Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:31:46.215Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:31:52.365Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 2168, Requested 4344. Please try again in 5.12s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:31:54.064Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:31:54.065Z] System message length: 62
+[2026-05-30T08:31:54.066Z] User messages count: 1
+[2026-05-30T08:31:54.067Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "build app",
+  "app_type": "",
+  "description": "",
+  "features": [],
+  "entities": []...
+[2026-05-30T08:31:54.068Z] Routing to Groq...
+[2026-05-30T08:31:54.115Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:31:55.925Z] Groq response received! Status: 200. Text length: 3968
+[2026-05-30T08:31:57.147Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:31:57.148Z] System message length: 62
+[2026-05-30T08:31:57.148Z] User messages count: 1
+[2026-05-30T08:31:57.149Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "I need something for my business to track stuff and maybe sell things online with user...
+[2026-05-30T08:31:57.150Z] Routing to Groq...
+[2026-05-30T08:31:57.197Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:31:57.238Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:32:00.299Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:32:06.897Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 2901, Requested 3435. Please try again in 3.36s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:32:08.041Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:32:08.042Z] System message length: 62
+[2026-05-30T08:32:08.042Z] User messages count: 1
+[2026-05-30T08:32:08.043Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "I need something for my business to track stuff and maybe sell things online with user...
+[2026-05-30T08:32:08.044Z] Routing to Groq...
+[2026-05-30T08:32:08.092Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:32:08.251Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:32:11.629Z] Groq response received! Status: 200. Text length: 516
+[2026-05-30T08:32:11.964Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:32:11.965Z] System message length: 62
+[2026-05-30T08:32:11.966Z] User messages count: 1
+[2026-05-30T08:32:11.967Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Business Tracker",
+  "app_type": "CRM, E-commerce",
+  "description": "A busine...
+[2026-05-30T08:32:11.967Z] Routing to Groq...
+[2026-05-30T08:32:12.015Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:32:12.064Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:32:15.146Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:32:22.423Z] Groq response received! Status: 200. Text length: 2844
+[2026-05-30T08:32:22.451Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:32:22.451Z] System message length: 62
+[2026-05-30T08:32:22.452Z] User messages count: 1
+[2026-05-30T08:32:22.453Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Business Tracker",
+  "app_type": "CRM, E-commerce",
+  "description": "A business app ...
+[2026-05-30T08:32:22.453Z] Routing to Groq...
+[2026-05-30T08:32:22.497Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:32:22.630Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:32:25.698Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:32:35.183Z] Groq response received! Status: 200. Text length: 7463
+[2026-05-30T08:32:35.990Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:32:35.991Z] System message length: 62
+[2026-05-30T08:32:35.992Z] User messages count: 1
+[2026-05-30T08:32:35.992Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Business Tracker",
+  "app_type": "CRM, E-commerce",
+  "description": "A business app ...
+[2026-05-30T08:32:35.993Z] Routing to Groq...
+[2026-05-30T08:32:36.035Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:32:36.173Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:32:39.228Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:32:45.365Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4360, Requested 3735. Please try again in 20.95s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:32:47.004Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:32:47.005Z] System message length: 62
+[2026-05-30T08:32:47.006Z] User messages count: 1
+[2026-05-30T08:32:47.007Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Business Tracker",
+  "app_type": "CRM, E-commerce",
+  "description": "A business app ...
+[2026-05-30T08:32:47.008Z] Routing to Groq...
+[2026-05-30T08:32:47.062Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:32:47.233Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:32:50.370Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:32:56.555Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3241, Requested 4877. Please try again in 21.18s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:32:57.095Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:32:57.096Z] System message length: 62
+[2026-05-30T08:32:57.096Z] User messages count: 1
+[2026-05-30T08:32:57.097Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Create a social media platform AND a CRM AND an e-commerce store AND a video streaming...
+[2026-05-30T08:32:57.098Z] Routing to Groq...
+[2026-05-30T08:32:57.143Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:32:57.270Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:33:00.704Z] Groq response received! Status: 200. Text length: 699
+[2026-05-30T08:33:00.735Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:33:00.736Z] System message length: 62
+[2026-05-30T08:33:00.737Z] User messages count: 1
+[2026-05-30T08:33:00.738Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Unified Platform",
+  "app_type": "SaaS",
+  "description": "A comprehensive pla...
+[2026-05-30T08:33:00.739Z] Routing to Groq...
+[2026-05-30T08:33:00.783Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:33:02.289Z] Groq response received! Status: 200. Text length: 3575
+[2026-05-30T08:33:02.339Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:33:02.341Z] System message length: 62
+[2026-05-30T08:33:02.344Z] User messages count: 1
+[2026-05-30T08:33:02.346Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Unified Platform",
+  "app_type": "SaaS",
+  "description": "A comprehensive platform c...
+[2026-05-30T08:33:02.355Z] Routing to Groq...
+[2026-05-30T08:33:02.412Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:33:02.469Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:33:05.646Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:33:11.812Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3649, Requested 5148. Please try again in 27.97s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:33:13.083Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:33:13.084Z] System message length: 62
+[2026-05-30T08:33:13.105Z] User messages count: 1
+[2026-05-30T08:33:13.107Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Unified Platform",
+  "app_type": "SaaS",
+  "description": "A comprehensive platform c...
+[2026-05-30T08:33:13.109Z] Routing to Groq...
+[2026-05-30T08:33:13.156Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:33:13.304Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:33:16.505Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:33:22.662Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 2564, Requested 4006. Please try again in 5.7s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:33:23.702Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:33:23.703Z] System message length: 62
+[2026-05-30T08:33:23.704Z] User messages count: 1
+[2026-05-30T08:33:23.705Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Unified Platform",
+  "app_type": "SaaS",
+  "description": "A comprehensive platform c...
+[2026-05-30T08:33:23.706Z] Routing to Groq...
+[2026-05-30T08:33:23.972Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:33:24.161Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:33:27.535Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:33:36.177Z] Groq response received! Status: 200. Text length: 6849
+[2026-05-30T08:33:36.216Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:33:36.217Z] System message length: 62
+[2026-05-30T08:33:36.217Z] User messages count: 1
+[2026-05-30T08:33:36.218Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Unified Platform",
+  "features": [
+    "Social media platform",
+    "CRM",
+    "E-comm...
+[2026-05-30T08:33:36.225Z] Routing to Groq...
+[2026-05-30T08:33:36.294Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:33:36.453Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:33:39.509Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:33:45.917Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3974, Requested 4412. Please try again in 23.86s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:33:46.972Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:33:46.973Z] System message length: 62
+[2026-05-30T08:33:46.974Z] User messages count: 1
+[2026-05-30T08:33:46.975Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Unified Platform",
+  "features": [
+    "Social media platform",
+    "CRM",
+    "E-comm...
+[2026-05-30T08:33:46.976Z] Routing to Groq...
+[2026-05-30T08:33:47.057Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:33:47.251Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:33:50.345Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:33:56.491Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 2917, Requested 5553. Please try again in 24.7s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:33:57.019Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:33:57.019Z] System message length: 62
+[2026-05-30T08:33:57.020Z] User messages count: 1
+[2026-05-30T08:33:57.021Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Build the same thing as Slack but better"
+
+Return ONLY valid JSON with this exact stru...
+[2026-05-30T08:33:57.021Z] Routing to Groq...
+[2026-05-30T08:33:57.067Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:33:57.759Z] Groq response received! Status: 200. Text length: 795
+[2026-05-30T08:33:57.784Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:33:57.785Z] System message length: 62
+[2026-05-30T08:33:57.786Z] User messages count: 1
+[2026-05-30T08:33:57.786Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Slack Alternative",
+  "app_type": "Communication and Collaboration Platform",
+...
+[2026-05-30T08:33:57.787Z] Routing to Groq...
+[2026-05-30T08:33:57.829Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:33:57.871Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:34:00.930Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:34:07.064Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 2295, Requested 3709. Please try again in 40ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:34:08.127Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:34:08.128Z] System message length: 62
+[2026-05-30T08:34:08.129Z] User messages count: 1
+[2026-05-30T08:34:08.130Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Slack Alternative",
+  "app_type": "Communication and Collaboration Platform",
+...
+[2026-05-30T08:34:08.130Z] Routing to Groq...
+[2026-05-30T08:34:08.176Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:34:10.052Z] Groq response received! Status: 200. Text length: 4793
+[2026-05-30T08:34:10.089Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:34:10.090Z] System message length: 62
+[2026-05-30T08:34:10.090Z] User messages count: 1
+[2026-05-30T08:34:10.092Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Slack Alternative",
+  "app_type": "Communication and Collaboration Platform",
+  "desc...
+[2026-05-30T08:34:10.093Z] Routing to Groq...
+[2026-05-30T08:34:10.143Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:34:10.193Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:34:13.243Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:34:19.606Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 2895, Requested 4451. Please try again in 13.46s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:34:28.189Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:34:28.190Z] System message length: 62
+[2026-05-30T08:34:28.203Z] User messages count: 1
+[2026-05-30T08:34:28.206Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Slack Alternative",
+  "app_type": "Communication and Collaboration Platform",
+  "desc...
+[2026-05-30T08:34:28.207Z] Routing to Groq...
+[2026-05-30T08:34:28.392Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:34:28.709Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:34:31.797Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:34:41.218Z] Groq response received! Status: 200. Text length: 10755
+[2026-05-30T08:34:41.776Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:34:41.777Z] System message length: 62
+[2026-05-30T08:34:41.778Z] User messages count: 1
+[2026-05-30T08:34:41.779Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Make an app where users can login and do things based on their role"
+
+Return ONLY vali...
+[2026-05-30T08:34:41.780Z] Routing to Groq...
+[2026-05-30T08:34:41.826Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:34:41.958Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:34:45.012Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:34:51.219Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 4913, Requested 3433. Please try again in 23.46s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:34:52.258Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:34:52.260Z] System message length: 62
+[2026-05-30T08:34:52.260Z] User messages count: 1
+[2026-05-30T08:34:52.261Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Make an app where users can login and do things based on their role"
+
+Return ONLY vali...
+[2026-05-30T08:34:52.262Z] Routing to Groq...
+[2026-05-30T08:34:52.402Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:34:52.619Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:34:55.904Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:35:02.036Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 3832, Requested 3433. Please try again in 12.65s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:35:08.907Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:35:08.908Z] System message length: 62
+[2026-05-30T08:35:08.909Z] User messages count: 1
+[2026-05-30T08:35:08.910Z] Last user message preview: You are Stage 1 of an app compiler pipeline. Extract structured intent from the user's description.
+
+USER INPUT: "Make an app where users can login and do things based on their role"
+
+Return ONLY vali...
+[2026-05-30T08:35:08.911Z] Routing to Groq...
+[2026-05-30T08:35:09.131Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:35:09.320Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:35:12.380Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:35:18.923Z] Groq response received! Status: 200. Text length: 540
+[2026-05-30T08:35:18.962Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:35:18.963Z] System message length: 62
+[2026-05-30T08:35:18.964Z] User messages count: 1
+[2026-05-30T08:35:18.965Z] Last user message preview: You are Stage 2 of an app compiler pipeline. Convert extracted intent into system architecture.
+
+INTENT: {
+  "app_name": "Role-Based App",
+  "app_type": "Dashboard",
+  "description": "An app where use...
+[2026-05-30T08:35:18.966Z] Routing to Groq...
+[2026-05-30T08:35:19.084Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:35:19.298Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:35:23.317Z] Groq response received! Status: 200. Text length: 1861
+[2026-05-30T08:35:23.350Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:35:23.351Z] System message length: 62
+[2026-05-30T08:35:23.352Z] User messages count: 1
+[2026-05-30T08:35:23.353Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Role-Based App",
+  "app_type": "Dashboard",
+  "description": "An app where users can ...
+[2026-05-30T08:35:23.355Z] Routing to Groq...
+[2026-05-30T08:35:23.419Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:35:23.595Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:35:26.655Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:35:32.803Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 2109, Requested 5255. Please try again in 13.64s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:35:33.868Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:35:33.871Z] System message length: 62
+[2026-05-30T08:35:33.874Z] User messages count: 1
+[2026-05-30T08:35:33.876Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Role-Based App",
+  "app_type": "Dashboard",
+  "description": "An app where users can ...
+[2026-05-30T08:35:33.877Z] Routing to Groq...
+[2026-05-30T08:35:33.927Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:35:34.067Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:35:37.127Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:35:43.293Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 1060, Requested 5255. Please try again in 3.15s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:35:45.001Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:35:45.002Z] System message length: 62
+[2026-05-30T08:35:45.003Z] User messages count: 1
+[2026-05-30T08:35:45.004Z] Last user message preview: You are Stage 3 of an app compiler pipeline. Generate complete production-ready schemas.
+
+INTENT: {
+  "app_name": "Role-Based App",
+  "app_type": "Dashboard",
+  "description": "An app where users can ...
+[2026-05-30T08:35:45.004Z] Routing to Groq...
+[2026-05-30T08:35:45.049Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:35:47.330Z] Groq response received! Status: 200. Text length: 4355
+[2026-05-30T08:35:47.374Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:35:47.375Z] System message length: 62
+[2026-05-30T08:35:47.380Z] User messages count: 1
+[2026-05-30T08:35:47.381Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Role-Based App",
+  "features": [
+    "User login functionality",
+    "Role-based acces...
+[2026-05-30T08:35:47.389Z] Routing to Groq...
+[2026-05-30T08:35:47.436Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:35:47.486Z] [Compiler API] 8B model rate limited. Waiting 3000ms...
+[2026-05-30T08:35:50.545Z] [Compiler API] 8B model still rate limited. Waiting 6000ms...
+[2026-05-30T08:35:56.691Z] Groq API error! Status: 429. Error body: {"error":{"message":"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kst202pcf8br86t8gvk2n6gw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 2098, Requested 5549. Please try again in 16.47s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+[2026-05-30T08:35:58.031Z] --- NEW COMPILE REQUEST ---
+[2026-05-30T08:35:58.032Z] System message length: 62
+[2026-05-30T08:35:58.033Z] User messages count: 1
+[2026-05-30T08:35:58.034Z] Last user message preview: You are Stage 4 of an app compiler pipeline. Find and fix ALL inconsistencies.
+
+ORIGINAL INTENT: {
+  "app_name": "Role-Based App",
+  "features": [
+    "User login functionality",
+    "Role-based acces...
+[2026-05-30T08:35:58.035Z] Routing to Groq...
+[2026-05-30T08:35:58.083Z] [Compiler API] 70B model rate limited (429). Falling back to llama-3.1-8b-instant...
+[2026-05-30T08:36:01.861Z] Groq response received! Status: 200. Text length: 8955
