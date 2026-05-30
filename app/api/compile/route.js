@@ -96,9 +96,9 @@ export async function POST(req) {
     }
 
     if (!process.env.ANTHROPIC_API_KEY) {
-      log(`Anthropic key missing, no Groq key found.`);
+      log(`No API key found. Set GROQ_API_KEY or ANTHROPIC_API_KEY in your environment.`);
       return Response.json(
-        { error: "ANTHROPIC_API_KEY is not set. Add it to your .env.local file." },
+        { error: "No AI API key configured. Please set the GROQ_API_KEY environment variable in your Render dashboard (Environment → Add Environment Variable)." },
         { status: 500 }
       );
     }
